@@ -1,10 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello World</title>
-</head>
-<body>
-    <h1>Hello, World!</h1>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111827" />
+    <meta
+      name="description"
+      content="Responsive full-page image background template"
+    />
+
+    <title>Yas & léo</title>
+
+    <!-- Preload a hero image (replace with your path) -->
+    <link rel="preload" href="/images/bgWeb.jpg" as="image" />
+
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <!-- Background element. Replace image sources with your own optimized images. -->
+    <div class="bg" aria-hidden="true">
+      <picture>
+        <source media="(min-width:1200px)" srcset="/images/bgWeb.jpg" />
+        <source media="(min-width:768px)" srcset="/images/bgWeb.jpg" />
+        <img
+          class="bg__img"
+          src="/images/bgWeb.jpg"
+          alt="Decorative: scenic background image filling the page"
+        />
+      </picture>
+      <div class="bg__overlay"></div>
+    </div>
+
+    <header role="banner">
+      <div class="brand">Yas & Léo se marrient</div>
+      <div class="brand">Samedi 2 mai 2026</div>
+    </header>
+
+    <main class="container" role="main">
+      <section class="card" aria-labelledby="invitation-title">
+        <div class="adress">
+          <div>
+            <h1 id="invitation-title">La Grande Riedera</h1>
+            <p>
+              Chemin de la Riedera 10<br />
+              1724 Le Mouret
+            </p>
+          </div>
+          <div
+            id="map"
+            style="height: 300px; border-radius: 12px; overflow: hidden"
+          >
+            <div class="map-overlay"></div>
+          </div>
+        </div>
+
+        <h2>Horaires</h2>
+        <ul>
+          <li>Arrivée : 15h</li>
+          <li>Début de la cérémonie : 15h30</li>
+          <li>Apéritif : 16h30</li>
+          <li>Repas : 19h</li>
+          <li>Fête à suivre</li>
+        </ul>
+
+        <h2>Comment venir</h2>
+        <p>
+          <strong>En voiture :</strong> 20 minutes depuis Bulle ou Fribourg / 40
+          minutes depuis Vevey (sortie A9 Rossens) / Parking sur place.<br />
+          <strong>En transports publics :</strong> arrêt de bus « Essert, La
+          Riedera » via Bulle ou Fribourg, Bus 234 ou 245 / 5–10 minutes à pied
+          et en montée.
+        </p>
+
+        <h2>Dress code</h2>
+        <p>
+          Nous porterons du blanc et du mauve, merci d’éviter ces couleurs et
+          leurs déclinaisons.
+        </p>
+
+        <h2>Logement</h2>
+        <p>
+          Des options de logement sur place sont disponibles, merci de prendre
+          contact avec nous pour s’organiser.
+        </p>
+
+        <h2>Cadeau</h2>
+        <p>
+          Une cagnotte sera prévue si vous souhaitez nous faire un petit cadeau
+          :) Cela financera une partie de notre voyage de noces au Japon &lt;3
+        </p>
+
+        <p style="margin-top: 1.5rem; font-weight: 600">
+          On se réjouit beaucoup de fêter avec vous !
+        </p>
+
+        <p style="opacity: 0.8; margin-top: 2rem">Photo de nous ?</p>
+      </section>
+    </main>
+  </body>
+  <script>
+    const map = L.map("map").setView([46.7406, 7.1864], 14);
+    L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
+    L.marker([46.7406, 7.1864])
+      .addTo(map)
+      .bindPopup("La Grande Riedera<br>Le Mouret")
+      .openPopup();
+
+    window.addEventListener("load", () => {
+      map.invalidateSize(); // fixes rendering issues
+    });
+  </script>
 </html>
