@@ -144,6 +144,21 @@ p { margin: 0 0 1rem 0; font-size: clamp(0.95rem, 1.8vw, 1.15rem); }
   background: lightgray; /* helps to check if div exists */
 }
 
+.photo-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center; /* center the image */
+}
+
+.photo-container img {
+  width: 20rem;       /* adjust size as needed */
+  height: 20rem;
+  object-fit: cover;  /* ensures image fills the circle */
+  border-radius: 50%; /* makes it a circle */
+  border: 2px solid #fff; /* optional: white border around photo */
+}
+
+
 @media (max-width: 600px){
   .card { padding: 1rem; border-radius: 8px; }
   header { padding-left: 0.75rem; padding-right: 0.75rem; }
