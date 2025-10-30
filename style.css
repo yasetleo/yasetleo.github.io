@@ -1,20 +1,160 @@
+/* Reset-ish */
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  src: url('AlteHaasGroteskRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  src: url('AlteHaasGroteskBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Apply it globally */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+:root{
+  --bg-fallback: #0f172a;
+  --overlay: rgba(3,7,18,0.45);
+  --accent: #06b6d4;
+  --max-width: 1200px;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #222;
-    margin: 0;
-    padding: 0;
+  font-family: 'Alte Haas Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #ffffff;
+  background-color: var(--bg-fallback);
+  line-height: 0.9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-    color: #007acc;
-    text-align: center;
-    margin-top: 40px;
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background-color: var(--bg-fallback);
 }
 
-.center {
+
+.bg__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  -o-object-fit: cover;
 }
+
+.bg__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 3em;
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.card {
+  max-width: 900px;
+  width: 100%;
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.adress {
+  display: flex;
+  flex-direction: column; /* stacked on small screens */
+  gap: 1rem;
+}
+
+.adress-text {
+  flex: 1; /* text takes available space */
+}
+
+#map-container {
+  flex: 1; /* map takes same width as text */
+  width: 100%;
+}
+
+#map {
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #cce7ff; /* light blue shade */
+    width: 100%;
+}
+
+/* Responsive for larger screens */
+@media (min-width: 768px) {
+  .adress {
+    flex-direction: row; /* side by side */
+    align-items: flex-start;
+  }
+}
+
+.map-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(204, 231, 255, 0.4); /* light blue 40% opacity */
+  pointer-events: none; /* allows clicking map normally */
+}
+
+h1 { margin: 0 0 0.5rem 0; font-size: clamp(1.6rem, 4vw, 2.8rem); }
+p { margin: 0 0 1rem 0; font-size: clamp(0.95rem, 1.8vw, 1.15rem); }
+
+.actions { display:flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn {
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+.btn--primary{ background: linear-gradient(90deg, var(--accent), #0891b2); color: #022; }
+
+
+#map {
+  height: 300px;
+  background: lightgray; /* helps to check if div exists */
+}
+
+@media (max-width: 600px){
+  .card { padding: 1rem; border-radius: 8px; }
+  header { padding-left: 0.75rem; padding-right: 0.75rem; }
+}
+
+@media (pointer: fine) and (min-width: 601px) {
+  .bg { background-attachment: fixed; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  * { transition: none !important; animation: none !important; }
+}
+
+:focus { outline: 3px solid rgba(255,255,255,0.18); outline-offset: 2px; }
