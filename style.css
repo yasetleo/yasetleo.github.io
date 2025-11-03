@@ -34,6 +34,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+iframe{
+  border-radius: 1em;
+}
+
 .bg {
   position: fixed;
   inset: 0;
@@ -120,7 +124,9 @@ header {
 .map-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(204, 231, 255, 0.4); /* light blue 40% opacity */
+  background-color: rgba(204, 231, 255, 1); /* light blue 40% opacity */
+  mix-blend-mode: hue;
+  z-index: 1000;
   pointer-events: none; /* allows clicking map normally */
 }
 
